@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Gabriela</title>
+  <style>
+    body {
+      font-family: "Times New Roman", serif;
+      padding: 50px;
+      background-color: white;
+      color: black;
+      overflow: hidden;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 26px;
+      white-space: pre-wrap;
+      line-height: 1.5;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      position: relative;
+      height: 200px;
+    }
+    button {
+      padding: 25px 45px;
+      font-size: 24px;
+      border-radius: 15px;
+      cursor: pointer;
+      background-color: white;
+      user-select: none;
+      transition: all 0.3s ease;
+    }
+    #yes {
+      border: 3px solid #28a745;
+      color: black;
+      position: relative;
+      z-index: 1;
+    }
+    #no {
+      border: 3px solid #dc3545;
+      color: black;
+      position: relative;
+      z-index: 1;
+    }
+    #message {
+      display: none;
+      margin-top: 50px;
+      font-size: 32px;
+      color: #ff1493;
+      font-weight: bold;
+      text-align: center;
+    }
+    .firework {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: gold;
+      border-radius: 50%;
+      animation: explode 1.5s ease-out forwards;
+      filter: drop-shadow(0 0 4px gold);
+      pointer-events: none;
+      z-index: 9999;
+    }
+    @keyframes explode {
+      to {
+        transform: translate(var(--x), var(--y)) scale(0.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>
+Gabriela mi cielo, desde que llegaste a mi vida todo ha cambiado para mejor.  
+Tu sonrisa ilumina mis días, tu voz calma mis pensamientos,  
+y tu amor me hace sentir completo.  
+Cada momento contigo es un regalo que agradezco a diario.  
+No existe nadie más con quien quiera compartir mi vida, mis sueños y mis días.  
+
+Quiero cuidar de ti, apoyarte, reír contigo y ser tu compañero en cada paso del camino.  
+No solo hoy, sino siempre.
+
+Y por eso creé esto para preguntarte, ¿deseas ser mi esposa toda la vida?
+  </h1>
+
+  <div class="button-container" id="buttonContainer">
+    <button id="yes">Sí 💍</button>
+    <button id="no">No 😢</button>
+  </div>
+
+  <div id="message">¡Sabía que dirías que sí! 💖</div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const container = document.getElementById("buttonContainer");
+    const message = document.getElementById("message");
+
+    function moveButton() {
+      noBtn.style.position = "absolute";
+      noBtn.style.zIndex = "2";
+
+      const containerRect = container.getBoundingClientRect();
+      const maxX = container.offsetWidth - noBtn.offsetWidth;
+      const maxY = container.offsetHeight - noBtn.offsetHeight;
+
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
+    }
+
+    function showMessage() {
+      message.style.display = "block";
+
+      for (let i = 0; i < 120; i++) {
+        const firework = document.createElement("div");
+        firework.classList.add("firework");
+        firework.style.left = (window.innerWidth / 2) + "px";
+        firework.style.top = (window.innerHeight / 2) + "px";
+        firework.style.setProperty('--x', `${(Math.random() - 0.5) * 600}px`);
+        firework.style.setProperty('--y', `${(Math.random() - 0.5) * 600}px`);
+        document.body.appendChild(firework);
+        setTimeout(() => firework.remove(), 1500);
+      }
+    }
+
+    noBtn.addEventListener("mouseenter", moveButton);
+    noBtn.addEventListener("touchstart", moveButton);
+    yesBtn.addEventListener("click", showMessage);
+  </script>
+
+</body>
+</html>
